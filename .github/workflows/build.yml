@@ -1,9 +1,8 @@
-name: Test, build and push image
+name: Build and push image
 
-# Pull requests run the tests only. An image is built and pushed only when a
-# change lands on main; there is no manual trigger.
+# A change landing on main runs the tests, then builds and pushes the image.
+# There is no manual trigger.
 on:
-  pull_request:
   push:
     branches: [main]
     paths:
@@ -12,34 +11,16 @@ on:
       - "Dockerfile"
       - "requirements.txt"
       - ".github/workflows/build.yml"
+      - ".github/workflows/test.yml"
 
 jobs:
   test:
-    runs-on: ubuntu-24.04
+    uses: ./.github/workflows/test.yml
     permissions:
       contents: read
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      # Only what the package imports and the checks don't stub. Neither
-      # check needs Presidio or spaCy, so this costs seconds.
-      - run: pip install fastapi httpx pyyaml uvicorn
-
-      # The fixtures stub redactor and session wholesale, so their import
-      # lines never execute there. This check covers them.
-      - run: python tests/import_check.py
-
-      - name: Replay the characterization fixtures
-        working-directory: tests/characterization
-        run: python characterize.py verify --app-path ../..
 
   release:
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     # amd64 only: no arm64 consumer today, and the image is built natively.
     runs-on: ubuntu-24.04
     # One release at a time, so two merges can't claim the same version.
