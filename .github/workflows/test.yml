@@ -1,0 +1,31 @@
+name: Test
+
+# Runs on every pull request. build.yml also calls it before a release, so a
+# merge to main is tested once, not twice.
+on:
+  pull_request:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Only what the package imports and the checks don't stub. Neither
+      # check needs Presidio or spaCy, so this costs seconds.
+      - run: pip install fastapi httpx pyyaml uvicorn
+
+      # The fixtures stub redactor and session wholesale, so their import
+      # lines never execute there. This check covers them.
+      - run: python tests/import_check.py
+
+      - name: Replay the characterization fixtures
+        working-directory: tests/characterization
+        run: python characterize.py verify --app-path ../..
