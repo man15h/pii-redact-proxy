@@ -1,0 +1,75 @@
+{
+  "case": "chatgpt/codex-responses",
+  "module": "chatgpt_main",
+  "provider": "chatgpt",
+  "request": {
+    "body": {
+      "input": [
+        {
+          "content": [
+            {
+              "text": "ping zz-test-host.invalid",
+              "type": "input_text"
+            }
+          ],
+          "role": "user"
+        }
+      ],
+      "instructions": "host zz-test-host.invalid",
+      "model": "codex"
+    },
+    "headers": {
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/backend-api/codex/responses"
+  },
+  "response": {
+    "body": {
+      "id": "resp_2",
+      "output": [
+        {
+          "content": [
+            {
+              "text": "reached zz-test-host.invalid",
+              "type": "output_text"
+            }
+          ],
+          "type": "message"
+        }
+      ]
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {
+    "body": {
+      "input": [
+        {
+          "content": [
+            {
+              "text": "ping <ZZTESTREF_1>",
+              "type": "input_text"
+            }
+          ],
+          "role": "user"
+        }
+      ],
+      "instructions": "host <ZZTESTREF_1>",
+      "model": "codex"
+    },
+    "headers": {
+      "accept": "*/*",
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "testclient",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/backend-api/codex/responses"
+  }
+}

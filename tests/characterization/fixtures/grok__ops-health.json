@@ -1,0 +1,20 @@
+{
+  "case": "grok/ops-health",
+  "module": "openai_main",
+  "provider": "grok",
+  "request": {
+    "method": "GET",
+    "path": "/health"
+  },
+  "response": {
+    "body": {
+      "mappings_count": 1,
+      "status": "ok"
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {}
+}

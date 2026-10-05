@@ -1,0 +1,19 @@
+{
+  "case": "anthropic/ops-mappings-clear",
+  "module": "main",
+  "provider": "anthropic",
+  "request": {
+    "method": "POST",
+    "path": "/mappings/clear"
+  },
+  "response": {
+    "body": {
+      "status": "cleared"
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {}
+}

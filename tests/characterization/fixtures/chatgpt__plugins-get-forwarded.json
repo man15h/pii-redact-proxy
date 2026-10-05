@@ -1,0 +1,35 @@
+{
+  "case": "chatgpt/plugins-get-forwarded",
+  "module": "chatgpt_main",
+  "provider": "chatgpt",
+  "request": {
+    "headers": {
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "GET",
+    "path": "/backend-api/plugins/featured"
+  },
+  "response": {
+    "body": {
+      "plugins": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {
+    "body": {},
+    "headers": {
+      "accept": "*/*",
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "testclient",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "GET",
+    "path": "/backend-api/plugins/featured"
+  }
+}

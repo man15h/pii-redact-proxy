@@ -1,0 +1,44 @@
+{
+  "case": "anthropic/passthrough-forwards-unredacted",
+  "module": "main",
+  "provider": "anthropic",
+  "request": {
+    "body": {
+      "note": "secret is zz-test-host.invalid"
+    },
+    "headers": {
+      "anthropic-beta": "prompt-caching-2024-07-31",
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+      "x-api-key": "sk-ant-test",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/v1/some-future-endpoint"
+  },
+  "response": {
+    "body": {
+      "ok": true
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {
+    "body": {
+      "note": "secret is zz-test-host.invalid"
+    },
+    "headers": {
+      "accept": "*/*",
+      "anthropic-beta": "prompt-caching-2024-07-31",
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+      "user-agent": "testclient",
+      "x-api-key": "sk-ant-test",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/v1/some-future-endpoint"
+  }
+}

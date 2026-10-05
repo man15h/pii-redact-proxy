@@ -1,0 +1,20 @@
+{
+  "case": "grok/ops-version",
+  "module": "openai_main",
+  "provider": "grok",
+  "request": {
+    "method": "GET",
+    "path": "/version"
+  },
+  "response": {
+    "body": {
+      "build": "unknown",
+      "version": "2026-08-31.1"
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {}
+}

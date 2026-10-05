@@ -1,0 +1,20 @@
+{
+  "case": "anthropic/ops-health",
+  "module": "main",
+  "provider": "anthropic",
+  "request": {
+    "method": "GET",
+    "path": "/health"
+  },
+  "response": {
+    "body": {
+      "mappings_count": 1,
+      "status": "ok"
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {}
+}

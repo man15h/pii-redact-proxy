@@ -1,0 +1,33 @@
+{
+  "case": "grok/unhandled-put-blocked",
+  "module": "openai_main",
+  "provider": "grok",
+  "request": {
+    "body": {
+      "note": "secret is zz-test-host.invalid"
+    },
+    "headers": {
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "grok-shell/1.0.13 (linux; x86_64)",
+      "x-grok-session-id": "abc-123",
+      "x-unrelated": "should-not-forward",
+      "x-xai-token-auth": "xai-grok-cli"
+    },
+    "method": "PUT",
+    "path": "/v1/some-future-endpoint"
+  },
+  "response": {
+    "body": {
+      "error": {
+        "message": "PUT /v1/some-future-endpoint is not handled by the PII redaction proxy. Unrecognised PUT paths are blocked rather than forwarded unredacted.",
+        "type": "pii_proxy_error"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 501
+  },
+  "upstream": {}
+}

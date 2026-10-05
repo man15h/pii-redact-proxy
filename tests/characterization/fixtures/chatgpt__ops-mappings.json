@@ -1,0 +1,22 @@
+{
+  "case": "chatgpt/ops-mappings",
+  "module": "chatgpt_main",
+  "provider": "chatgpt",
+  "request": {
+    "method": "GET",
+    "path": "/mappings"
+  },
+  "response": {
+    "body": {
+      "count": 1,
+      "placeholders": [
+        "<ZZTESTREF_1>  (orig: zz-t\u2026, len 20)"
+      ]
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {}
+}

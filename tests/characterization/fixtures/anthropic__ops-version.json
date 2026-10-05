@@ -1,0 +1,20 @@
+{
+  "case": "anthropic/ops-version",
+  "module": "main",
+  "provider": "anthropic",
+  "request": {
+    "method": "GET",
+    "path": "/version"
+  },
+  "response": {
+    "body": {
+      "build": "unknown",
+      "version": "2026-08-21.2"
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {}
+}

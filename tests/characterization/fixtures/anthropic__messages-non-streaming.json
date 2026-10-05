@@ -1,0 +1,120 @@
+{
+  "case": "anthropic/messages-non-streaming",
+  "module": "main",
+  "provider": "anthropic",
+  "request": {
+    "body": {
+      "messages": [
+        {
+          "content": "is zz-test-host.invalid up?",
+          "role": "user"
+        },
+        {
+          "content": [
+            {
+              "text": "checking zz-test-host.invalid",
+              "type": "text"
+            },
+            {
+              "id": "t1",
+              "input": {
+                "host": "zz-test-host.invalid"
+              },
+              "name": "ping",
+              "type": "tool_use"
+            }
+          ],
+          "role": "assistant"
+        },
+        {
+          "content": [
+            {
+              "content": "pong from zz-test-host.invalid",
+              "tool_use_id": "t1",
+              "type": "tool_result"
+            }
+          ],
+          "role": "user"
+        }
+      ],
+      "model": "claude-opus-4",
+      "system": "You deploy to zz-test-host.invalid."
+    },
+    "headers": {
+      "anthropic-beta": "prompt-caching-2024-07-31",
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+      "x-api-key": "sk-ant-test",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/v1/messages"
+  },
+  "response": {
+    "body": {
+      "content": [
+        {
+          "text": "zz-test-host.invalid is up",
+          "type": "text"
+        }
+      ],
+      "id": "msg_1",
+      "role": "assistant",
+      "stop_reason": "end_turn",
+      "type": "message"
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {
+    "body": {
+      "messages": [
+        {
+          "content": "is <ZZTESTREF_1> up?",
+          "role": "user"
+        },
+        {
+          "content": [
+            {
+              "text": "checking <ZZTESTREF_1>",
+              "type": "text"
+            },
+            {
+              "id": "t1",
+              "input": {
+                "host": "<ZZTESTREF_1>"
+              },
+              "name": "ping",
+              "type": "tool_use"
+            }
+          ],
+          "role": "assistant"
+        },
+        {
+          "content": [
+            {
+              "content": "pong from <ZZTESTREF_1>",
+              "tool_use_id": "t1",
+              "type": "tool_result"
+            }
+          ],
+          "role": "user"
+        }
+      ],
+      "model": "claude-opus-4",
+      "system": "You deploy to <ZZTESTREF_1>."
+    },
+    "headers": {
+      "accept": "*/*",
+      "anthropic-beta": "prompt-caching-2024-07-31",
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+      "user-agent": "python-httpx/0.28.1",
+      "x-api-key": "sk-ant-test"
+    },
+    "method": "POST",
+    "path": "/v1/messages"
+  }
+}
