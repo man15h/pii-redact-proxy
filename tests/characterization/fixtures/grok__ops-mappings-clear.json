@@ -1,0 +1,19 @@
+{
+  "case": "grok/ops-mappings-clear",
+  "module": "openai_main",
+  "provider": "grok",
+  "request": {
+    "method": "POST",
+    "path": "/mappings/clear"
+  },
+  "response": {
+    "body": {
+      "status": "cleared"
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {}
+}

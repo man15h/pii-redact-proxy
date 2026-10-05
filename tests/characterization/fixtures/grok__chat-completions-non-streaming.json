@@ -1,0 +1,153 @@
+{
+  "case": "grok/chat-completions-non-streaming",
+  "module": "openai_main",
+  "provider": "grok",
+  "request": {
+    "body": {
+      "messages": [
+        {
+          "content": "deploy to zz-test-host.invalid",
+          "role": "system"
+        },
+        {
+          "content": [
+            {
+              "text": "check zz-test-host.invalid",
+              "type": "text"
+            }
+          ],
+          "role": "user"
+        },
+        {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"h\": \"zz-test-host.invalid\"}",
+                "name": "ping"
+              },
+              "id": "c0",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "pong from zz-test-host.invalid",
+          "role": "tool",
+          "tool_call_id": "c0"
+        }
+      ],
+      "model": "grok-4",
+      "tools": [
+        {
+          "function": {
+            "name": "ping",
+            "parameters": {
+              "description": "pings zz-test-host.invalid"
+            }
+          },
+          "type": "function"
+        }
+      ]
+    },
+    "headers": {
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "grok-shell/1.0.13 (linux; x86_64)",
+      "x-grok-session-id": "abc-123",
+      "x-unrelated": "should-not-forward",
+      "x-xai-token-auth": "xai-grok-cli"
+    },
+    "method": "POST",
+    "path": "/v1/chat/completions"
+  },
+  "response": {
+    "body": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "content": "reached zz-test-host.invalid",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"h\": \"zz-test-host.invalid\"}",
+                  "name": "ping"
+                },
+                "id": "c1",
+                "type": "function"
+              }
+            ]
+          }
+        }
+      ],
+      "id": "chatcmpl_1",
+      "object": "chat.completion"
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {
+    "body": {
+      "messages": [
+        {
+          "content": "deploy to <ZZTESTREF_1>",
+          "role": "system"
+        },
+        {
+          "content": [
+            {
+              "text": "check <ZZTESTREF_1>",
+              "type": "text"
+            }
+          ],
+          "role": "user"
+        },
+        {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"h\": \"<ZZTESTREF_1>\"}",
+                "name": "ping"
+              },
+              "id": "c0",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "pong from <ZZTESTREF_1>",
+          "role": "tool",
+          "tool_call_id": "c0"
+        }
+      ],
+      "model": "grok-4",
+      "tools": [
+        {
+          "function": {
+            "name": "ping",
+            "parameters": {
+              "description": "pings <ZZTESTREF_1>"
+            }
+          },
+          "type": "function"
+        }
+      ]
+    },
+    "headers": {
+      "accept": "*/*",
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "grok-shell/1.0.13 (linux; x86_64)",
+      "x-grok-session-id": "abc-123",
+      "x-xai-token-auth": "xai-grok-cli"
+    },
+    "method": "POST",
+    "path": "/v1/chat/completions"
+  }
+}

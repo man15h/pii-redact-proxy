@@ -1,0 +1,30 @@
+{
+  "case": "chatgpt/unhandled-post-blocked",
+  "module": "chatgpt_main",
+  "provider": "chatgpt",
+  "request": {
+    "body": {
+      "note": "secret is zz-test-host.invalid"
+    },
+    "headers": {
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/backend-api/something-else"
+  },
+  "response": {
+    "body": {
+      "error": {
+        "message": "POST /backend-api/something-else is not handled by the PII redaction proxy. Unrecognised POST paths are blocked rather than forwarded unredacted.",
+        "type": "pii_proxy_error"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 501
+  },
+  "upstream": {}
+}

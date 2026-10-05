@@ -1,0 +1,58 @@
+{
+  "case": "grok/chat-completions-streaming-split-placeholder",
+  "module": "openai_main",
+  "provider": "grok",
+  "request": {
+    "body": {
+      "messages": [
+        {
+          "content": "where is zz-test-host.invalid",
+          "role": "user"
+        }
+      ],
+      "model": "grok-4",
+      "stream": true
+    },
+    "headers": {
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "grok-shell/1.0.13 (linux; x86_64)",
+      "x-grok-session-id": "abc-123",
+      "x-unrelated": "should-not-forward",
+      "x-xai-token-auth": "xai-grok-cli"
+    },
+    "method": "POST",
+    "path": "/v1/chat/completions"
+  },
+  "response": {
+    "headers": {
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "content-type": "text/event-stream; charset=utf-8"
+    },
+    "sse": "data: {\"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\"}, \"finish_reason\": null}]}\n\ndata: {\"choices\": [{\"index\": 0, \"delta\": {\"content\": \"host is \"}, \"finish_reason\": null}]}\n\ndata: {\"choices\": [{\"index\": 0, \"delta\": {\"content\": \"zz-test-host.invalid ok\"}, \"finish_reason\": null}]}\n\ndata: {\"choices\": [{\"index\": 0, \"delta\": {\"tool_calls\": [{\"index\": 0, \"id\": \"c1\", \"type\": \"function\", \"function\": {\"name\": \"ping\", \"arguments\": \"{\\\"h\\\":\\\"zz-test-host.invalid\\\"}\"}}]}, \"finish_reason\": \"tool_calls\"}]}\n\ndata: {\"choices\": [], \"usage\": {\"total_tokens\": 7}}\n\ndata: [DONE]\n\n",
+    "status": 200
+  },
+  "upstream": {
+    "body": {
+      "messages": [
+        {
+          "content": "where is <ZZTESTREF_1>",
+          "role": "user"
+        }
+      ],
+      "model": "grok-4",
+      "stream": true
+    },
+    "headers": {
+      "accept": "*/*",
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "grok-shell/1.0.13 (linux; x86_64)",
+      "x-grok-session-id": "abc-123",
+      "x-xai-token-auth": "xai-grok-cli"
+    },
+    "method": "POST",
+    "path": "/v1/chat/completions"
+  }
+}

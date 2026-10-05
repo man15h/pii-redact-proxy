@@ -1,0 +1,57 @@
+{
+  "case": "anthropic/count-tokens",
+  "module": "main",
+  "provider": "anthropic",
+  "request": {
+    "body": {
+      "messages": [
+        {
+          "content": "and zz-test-host.invalid",
+          "role": "user"
+        }
+      ],
+      "model": "claude-opus-4",
+      "system": "about zz-test-host.invalid"
+    },
+    "headers": {
+      "anthropic-beta": "prompt-caching-2024-07-31",
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+      "x-api-key": "sk-ant-test",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/v1/messages/count_tokens"
+  },
+  "response": {
+    "body": {
+      "input_tokens": 42
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {
+    "body": {
+      "messages": [
+        {
+          "content": "and <ZZTESTREF_1>",
+          "role": "user"
+        }
+      ],
+      "model": "claude-opus-4",
+      "system": "about <ZZTESTREF_1>"
+    },
+    "headers": {
+      "accept": "*/*",
+      "anthropic-beta": "prompt-caching-2024-07-31",
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+      "user-agent": "python-httpx/0.28.1",
+      "x-api-key": "sk-ant-test"
+    },
+    "method": "POST",
+    "path": "/v1/messages/count_tokens"
+  }
+}

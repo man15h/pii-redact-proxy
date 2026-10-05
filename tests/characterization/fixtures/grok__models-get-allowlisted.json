@@ -1,0 +1,43 @@
+{
+  "case": "grok/models-get-allowlisted",
+  "module": "openai_main",
+  "provider": "grok",
+  "request": {
+    "headers": {
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "grok-shell/1.0.13 (linux; x86_64)",
+      "x-grok-session-id": "abc-123",
+      "x-unrelated": "should-not-forward",
+      "x-xai-token-auth": "xai-grok-cli"
+    },
+    "method": "GET",
+    "path": "/v1/models"
+  },
+  "response": {
+    "body": {
+      "data": [
+        {
+          "id": "grok-4"
+        }
+      ]
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 200
+  },
+  "upstream": {
+    "body": {},
+    "headers": {
+      "accept": "*/*",
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "grok-shell/1.0.13 (linux; x86_64)",
+      "x-grok-session-id": "abc-123",
+      "x-xai-token-auth": "xai-grok-cli"
+    },
+    "method": "GET",
+    "path": "/v1/models"
+  }
+}

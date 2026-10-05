@@ -1,0 +1,64 @@
+{
+  "case": "chatgpt/codex-responses-streaming-split-placeholder",
+  "module": "chatgpt_main",
+  "provider": "chatgpt",
+  "request": {
+    "body": {
+      "input": [
+        {
+          "content": [
+            {
+              "text": "where is zz-test-host.invalid",
+              "type": "input_text"
+            }
+          ],
+          "role": "user"
+        }
+      ],
+      "model": "codex",
+      "stream": true
+    },
+    "headers": {
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/backend-api/codex/responses"
+  },
+  "response": {
+    "headers": {
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "content-type": "text/event-stream; charset=utf-8"
+    },
+    "sse": "event: response.created\ndata: {\"type\": \"response.created\", \"response\": {\"id\": \"resp_3\"}}\n\nevent: response.output_text.delta\ndata: {\"type\": \"response.output_text.delta\", \"item_id\": \"item_1\", \"content_index\": 0, \"delta\": \"host is \"}\n\nevent: response.output_text.delta\ndata: {\"type\": \"response.output_text.delta\", \"item_id\": \"item_1\", \"content_index\": 0, \"delta\": \"zz-test-host.invalid ok\"}\n\nevent: response.output_text.done\ndata: {\"type\": \"response.output_text.done\", \"item_id\": \"item_1\", \"content_index\": 0, \"text\": \"host is zz-test-host.invalid ok\"}\n\nevent: response.function_call_arguments.done\ndata: {\"type\": \"response.function_call_arguments.done\", \"item_id\": \"fc_1\", \"arguments\": \"{\\\"host\\\":\\\"zz-test-host.invalid\\\"}\"}\n\nevent: response.completed\ndata: {\"type\": \"response.completed\", \"response\": {\"id\": \"resp_3\", \"output\": []}}\n\ndata: [DONE]\n\n",
+    "status": 200
+  },
+  "upstream": {
+    "body": {
+      "input": [
+        {
+          "content": [
+            {
+              "text": "where is <ZZTESTREF_1>",
+              "type": "input_text"
+            }
+          ],
+          "role": "user"
+        }
+      ],
+      "model": "codex",
+      "stream": true
+    },
+    "headers": {
+      "accept": "*/*",
+      "authorization": "Bearer sk-test",
+      "content-type": "application/json",
+      "user-agent": "testclient",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/backend-api/codex/responses"
+  }
+}

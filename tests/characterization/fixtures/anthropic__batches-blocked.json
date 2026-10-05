@@ -1,0 +1,43 @@
+{
+  "case": "anthropic/batches-blocked",
+  "module": "main",
+  "provider": "anthropic",
+  "request": {
+    "body": {
+      "requests": [
+        {
+          "params": {
+            "messages": [
+              {
+                "content": "batch zz-test-host.invalid",
+                "role": "user"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "headers": {
+      "anthropic-beta": "prompt-caching-2024-07-31",
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+      "x-api-key": "sk-ant-test",
+      "x-unrelated": "should-not-forward"
+    },
+    "method": "POST",
+    "path": "/v1/messages/batches"
+  },
+  "response": {
+    "body": {
+      "error": {
+        "message": "Message Batches API is not yet supported by the PII redaction proxy. Requests to /v1/messages/batches are blocked to prevent unredacted PII leaks.",
+        "type": "pii_proxy_error"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "status": 501
+  },
+  "upstream": {}
+}
